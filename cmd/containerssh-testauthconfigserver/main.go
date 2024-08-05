@@ -143,6 +143,14 @@ func (c *configHandler) OnConfig(request config.Request) (config.AppConfig, erro
         cfg.Docker.Execution.Mode = config.DockerExecutionModeSession
         cfg.Docker.Execution.ShellCommand = []string{"/bin/sh"}
     }
+    if request.Username == "foo" {
+        cfg.Docker.Execution.DockerLaunchConfig.ContainerConfig = &container.Config{}
+        cfg.Docker.Execution.DockerLaunchConfig.ContainerConfig.Image = "foo-image"
+        cfg.Docker.Execution.DisableAgent = true
+        cfg.Docker.Execution.Mode = config.DockerExecutionModeSession
+        cfg.Docker.Execution.ShellCommand = []string{"/bin/sh"}
+    }
+    
 
     return cfg, nil
 }
